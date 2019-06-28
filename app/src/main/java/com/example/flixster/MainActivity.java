@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flixster.models.Config;
 import com.example.flixster.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -37,11 +38,6 @@ public class MainActivity extends AppCompatActivity {
     //tag for logging activity
     public final static String TAG = "MovieListActivity";
 
-    //the base url for loading images
-    String imageBaseURL;
-
-    //the poser size to use when fetching images, part of the url
-    String posterSize;
 
     //the list of currently playing movies
     ArrayList<Movie> movies;
@@ -51,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
     //the adapater wired to the recycler view
     MovieAdapter adapter;
+
+    //backdrop size to use when fetching images
+    String backdropSize;
+
+    //image config
+    Config config;
 
 
     @Override
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         rvMovies = findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
+
 
         //get the configuration on app creation
         getConfiguration();
@@ -126,15 +129,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONObject images = response.getJSONObject("images");
+                    config = new Config(response);
+                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s",
+                            config.getImageBaseURL(),
+                            config.getPosterSize()));
 
-                    //get the image base url
-                    imageBaseURL = images.getString("secure_base_url");
-                    //get the poster size
-                    JSONArray posterSizeOptions = images.getJSONArray("poster_sizes");
-                    //use the option at index 3 (which is where I expect the value to be) or w342 as a fallback
-                    posterSize = posterSizeOptions.optString(3, "w342");
-                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s", imageBaseURL, posterSize));
+                    //passing config to adapter
+                    adapter.setConfig(config);
+
+                    //JSONArray backdropSizeOptions = images.getJSONArray("backdrop_sizes");
+                    //backdropSize = backdropSizeOptions.optString(1, "w780");
                 }
                 catch (JSONException E) {
                     logError("Failed parsing configuration", E, true);

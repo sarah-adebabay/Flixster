@@ -10,6 +10,7 @@ public class Movie {
     private String title;
     private String overview;
     private String posterPath; // only the path
+    private String backdropPath;
 
 
     public Movie(JSONObject object) throws JSONException {
@@ -29,5 +30,9 @@ public class Movie {
 
     public String getPosterPath() {
         return posterPath;
+    }
+
+    public String getBackdropPath() {
+        return backdropPath;
     }
 }
