@@ -45,11 +45,8 @@ public class MainActivity extends AppCompatActivity {
     //the recycler view
     RecyclerView rvMovies;
 
-    //the adapater wired to the recycler view
+    //the adapter wired to the recycler view
     MovieAdapter adapter;
-
-    //backdrop size to use when fetching images
-    String backdropSize;
 
     //image config
     Config config;
@@ -136,9 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
                     //passing config to adapter
                     adapter.setConfig(config);
-
-                    //JSONArray backdropSizeOptions = images.getJSONArray("backdrop_sizes");
-                    //backdropSize = backdropSizeOptions.optString(1, "w780");
                 }
                 catch (JSONException E) {
                     logError("Failed parsing configuration", E, true);

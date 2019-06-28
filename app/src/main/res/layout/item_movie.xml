@@ -32,15 +32,14 @@
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:text="Movie overview and synopsis"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/ivPosterImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivPosterImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -52,7 +51,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Movie overview and synopsis"
+        android:visibility="gone"
+        android:text="Longer ONE   NFKLDHSAJKHFDJSHJHFLDJHSJKFDJKHJKSA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivPosterImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />

@@ -1,6 +1,7 @@
 package com.example.flixster;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixster.models.Config;
 import com.example.flixster.models.Movie;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -45,7 +47,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //get the context from parenet and create the inflater
+        //get the context from parent and create the inflater
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         //create the view using the item_movie layout
@@ -64,16 +66,27 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.tvTitle.setText(movie.getTitle());
         holder.tvOverview.setText(movie.getOverview());
 
-        //build url for poster image
-        String imageUrl = config.getImageURL(config.getPosterSize(), config.getPosterSize());
+        //determine position of the phone
+        boolean isP = (context.getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_PORTRAIT);
+
+        String imageUrl;
+        if (isP) {
+            imageUrl = config.getImageURL(config.getPosterSize(), movie.getPosterPath());
+        } else {
+            imageUrl = config.getImageURL(config.getBackdropSize(), movie.getBackdropPath());
+        }
+
+        int placeholder = (isP) ? R.drawable.flicks_movie_placeholder : R.drawable.flicks_backdrop_placeholder;
+        ImageView imageView = (isP) ? holder.ivPosterImage : holder.ivBackdropImage;
 
         //load image using glide
         Glide.with(context)
                 .load(imageUrl)
-                .bitmapTransform(new RoundedCorners(context, 25, 0))
-                .placeholder(R.drawable.flicks_movie_placeholder)
-                .error(R.drawable.flicks_movie_placeholder)
-                .into(holder.ivPosterImage);
+                .bitmapTransform(new RoundedCornersTransformation(context, 25, 0))
+                .placeholder(placeholder)
+                .error(placeholder)
+                .into(imageView);
     }
 
     //returns the total number of items in the list -- MUST NOT BE NONZERO
@@ -89,14 +102,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         ImageView ivPosterImage;
         TextView tvTitle;
         TextView tvOverview;
+        ImageView ivBackdropImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             //look up view objects by id
             ivPosterImage = itemView.findViewById(R.id.ivPosterImage);
-            tvOverview = (TextView) itemView.findViewById(R.id.tvOverview);
-            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+            ivBackdropImage = itemView.findViewById(R.id.ivBackdropImage);
+            tvOverview = itemView.findViewById(R.id.tvOverview);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
         }
     }
 }

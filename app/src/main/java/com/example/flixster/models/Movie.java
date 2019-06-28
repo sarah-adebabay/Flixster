@@ -17,6 +17,7 @@ public class Movie {
         title = object.getString("title");
         overview = object.getString("overview");
         posterPath = object.getString("poster_path");
+        backdropPath = object.getString("backdrop_path");
 
     }
 
@@ -36,3 +37,5 @@ public class Movie {
         return backdropPath;
     }
 }
+
+
