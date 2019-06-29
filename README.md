@@ -1,8 +1,8 @@
-# Project 2 - *Name of App Here*
+# Project 2 - Melinda - A Movie Expert in Your Pocket
 
-**Name of your app** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
+Melinda - A Movie Expert in Your Pocket shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
-Time spent: **X** hours spent in total
+Time spent: 16 hours spent in total
 
 ## User Stories
 
@@ -30,13 +30,15 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/sarah-adebabay/Flixster/blob/master/Flixster_Walkthrough.gif?raw=true' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+As a new Android App Developer, it was very difficult building this app, but I am so happy because it was very rewarding. I learned so much about working with APIs, building a layout with images, and the importance of Adapters. 
+
+I also learned how impactful it can be to build an app that fits the functionality you wish for -- I believe tha t
 
 ## Open-source libraries used
 
