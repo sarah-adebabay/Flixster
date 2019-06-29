@@ -38,8 +38,6 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 As a new Android App Developer, it was very difficult building this app, but I am so happy because it was very rewarding. I learned so much about working with APIs, building a layout with images, and the importance of Adapters. 
 
-I also learned how impactful it can be to build an app that fits the functionality you wish for -- I believe tha t
-
 ## Open-source libraries used
 
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
